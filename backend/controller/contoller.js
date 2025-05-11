@@ -1,3 +1,4 @@
+// controller/contoller.js
 import pdfModel from '../models/pdfModel.js';
 
 export const addpdf = async (req, res) => {
@@ -9,23 +10,19 @@ export const addpdf = async (req, res) => {
   }
 
   try {
-    const job = new pdfModel({
+    const newPdf = new pdfModel({
       title,
       description,
       pdf: {
-        filename: file.filename,
-        path: file.path,
+        data: file.buffer, // save buffer directly
         mimetype: file.mimetype,
-        size: file.size,
+        filename: file.originalname,
       },
     });
 
-    await job.save();
-    return res.json({
-      success: true,
-      message: 'PDF uploaded and saved successfully!',
-    });
+    await newPdf.save();
+    res.json({ success: true, message: 'PDF saved to database' });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
