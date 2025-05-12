@@ -26,3 +26,14 @@ export const addpdf = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+
+//Get PDF method
+export const getPdfs=async (req,res)=>{
+  try{
+    const pdfs=await pdfModel.find({},'title description');
+    res.json({success:true,pdfs});
+  }catch(error){
+    res.json({success:false,message:error.message});
+  }
+};
