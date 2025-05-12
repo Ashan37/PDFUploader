@@ -54,10 +54,18 @@ export default function Search() {
 
       <div className="result-list">
         {filteredPdfs.length > 0 ? (
-          filteredPdfs.map((pdf, idx) => (
-            <div key={idx} className="result-card">
+          filteredPdfs.map((pdf) => (
+            <div key={pdf._id} className="result-card">
               <h3>{pdf.title}</h3>
               <p>{pdf.description}</p>
+              <a
+                href={`http://localhost:4000/api/auth/getpdf/${pdf._id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="view-button"
+              >
+                View PDF
+              </a>
             </div>
           ))
         ) : (

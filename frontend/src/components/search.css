@@ -53,6 +53,22 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.view-button {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 8px 12px;
+  background-color: #00b894;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+  background-color: #019170;
+}
+
 .no-results {
   text-align: center;
   color: #999;

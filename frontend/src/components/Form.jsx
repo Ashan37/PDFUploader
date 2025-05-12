@@ -3,17 +3,15 @@ import "./form.css";
 import { useNavigate } from "react-router-dom";
 
 export default function Form() {
-  const navigate=useNavigate();
-  const handleChange=()=>{
-    navigate('/search');
-  };
+  const navigate = useNavigate();
+  const handleChange = () => navigate('/search');
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (!file || file.type !== "application/pdf") {
       alert("Please upload a valid PDF file.");
       return;
@@ -22,7 +20,7 @@ export default function Form() {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    formData.append("file", file); // field name matches backend
+    formData.append("file", file);
 
     try {
       const res = await fetch("http://localhost:4000/api/auth/addpdf", {
@@ -37,7 +35,7 @@ export default function Form() {
         setTitle("");
         setDescription("");
         setFile(null);
-        document.getElementById("fileInput").value = ""; // Reset file input
+        document.getElementById("fileInput").value = "";
       } else {
         alert("Upload failed: " + data.message);
       }
@@ -84,14 +82,10 @@ export default function Form() {
 
         <div className="buttons">
           <div className="subbutton">
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
+            <button type="submit" className="submit-button">Submit</button>
           </div>
           <div className="srchbutton">
-            <button onClick={handleChange} type="button" className="search-button">
-              Search
-            </button>
+            <button onClick={handleChange} type="button" className="search-button">Search</button>
           </div>
         </div>
       </form>
